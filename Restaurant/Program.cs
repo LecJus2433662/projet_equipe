@@ -6,7 +6,12 @@ namespace Restaurant
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            Menu platMatin = new Menu("Menu du matin", 5);
+
+            Console.WriteLine("Appuyer sur ENTER pour afficher votre menu");
+            Console.WriteLine("*********************************** MATIN  *************************************************");
+            Console.WriteLine($"{platMatin}\n");
         }
     }
 }
