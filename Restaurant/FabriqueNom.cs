@@ -21,7 +21,7 @@ namespace Restaurant
 
         static void AjouterNom()
         {
-            string fichierNomFamille = "nom_famille.txt";
+            string fichierNomFamille = @"..\..\..\..\nom_famille.txt";
 
             using (StreamReader reader = new StreamReader(fichierNomFamille))
             {
@@ -34,7 +34,7 @@ namespace Restaurant
         }
         static void AjouterPrenom()
         {
-            string fichierPrenom = "prenom.txt";
+            string fichierPrenom = @"..\..\..\..\prenom.txt";
             using (StreamReader reader = new StreamReader(fichierPrenom))
             {
                 string line;
