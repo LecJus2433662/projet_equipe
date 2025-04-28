@@ -9,14 +9,14 @@ namespace Restaurant
 {
     public class Plat
     {
-        List<Plat> platt { get; set; }
+        List<Ingredient> ing { get; set; }
         string Nom { get; set; }
         double PrixIngredient { get; set; }
         public double PrixAchat { get; private set; }
 
         public Plat(string nom, double prixIng)
         {
-            platt = new List<Plat>();
+            ing = new List<Ingredient>();
             this.Nom = nom;
             this.PrixIngredient = prixIng;
         }
@@ -25,9 +25,9 @@ namespace Restaurant
         {
             double result = 0;
 
-            foreach (Plat p in platt)
+            foreach (Ingredient ingredient in ing)
             {
-                result += p.PrixAchat;
+                result += ingredient.PrixAchat;
             }
             return result;
         }
@@ -37,16 +37,10 @@ namespace Restaurant
             return CalculerCout() * 1.5; 
         }
 
-
-        public void AjouterPLat(Plat plat)
-        {
-            platt.Add(plat);
-        }
-
-        private string AjouterPlat()
+        private string InfoPlat()
         {
             string afficher = "";
-            foreach (Plat filmAfficher in platt)
+            foreach (Ingredient filmAfficher in ing)
             {
                 afficher += filmAfficher + "\n";
             }
