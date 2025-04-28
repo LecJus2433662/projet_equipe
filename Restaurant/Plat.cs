@@ -33,8 +33,20 @@ namespace Restaurant
         }
 
         public double CalculerVente()
-        { 
-            return CalculerCout() * 1.5; 
+        {
+            double prixFinal = 0;
+            double taxeUni = 1.5;
+            foreach (var ingredient in ing)
+            {
+                if(ingredient.QualiteIng == Qualite.Excellente)
+                    taxeUni += 3;
+                else if(ingredient.QualiteIng == Qualite.Moyenne)
+                    taxeUni += 2;
+                else 
+                    taxeUni += 1; 
+            }
+            prixFinal = CalculerCout() * taxeUni;
+            return prixFinal;
         }
 
         private string InfoPlat()
@@ -48,7 +60,7 @@ namespace Restaurant
         }
         public override string ToString()
         {
-            return $"Nom du plat : {Nom}, Prix des ingrédients : {PrixIngredient}";
+            return $"Nom du plat : {Nom}, Prix des ingrédients : {PrixIngredient}\n";
         }
     }
 }

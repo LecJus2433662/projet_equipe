@@ -29,18 +29,26 @@ namespace Restaurant
             Calorie = calorie;
 
             if (qualiteIng.Contains("Moyenne"))
+            {
                 QualiteIng = Qualite.Moyenne;
+            }
             else if (qualiteIng.Contains("Bonne"))
+            {
                 QualiteIng = Qualite.Bonne;
+            }
             else if (qualiteIng.Contains("Excellente"))
+            {
                 QualiteIng = Qualite.Excellente;
+            }
             else
+            {
                 QualiteIng = Qualite.Moyenne;
+            }
         }
 
         public override string ToString()
         {
-            return $"[Nom] : {Nom}, [prix] : {PrixAchat}$, [Calorie] : {Calorie}, [Qualite] : {QualiteIng} :)";
+            return $"[Nom] : {Nom}, [prix] : {PrixAchat}$, [Calorie] : {Calorie}, [Qualite] : {QualiteIng}";
         }
     }
 }
