@@ -12,13 +12,12 @@ namespace Restaurant
             Console.WriteLine("Appuyer sur ENTER pour afficher votre menu");
             Console.ReadLine();
             Console.Clear();
-            Ingredient tomate = new Ingredient("Tomate",10);
-            Ingredient laitue = new Ingredient("Laitue",15);
             Console.WriteLine("*********************************** PLAT  *************************************************");
 
             Console.WriteLine($"{platMatin}\n");
             Random rnd = new Random();
             int nbRandom = rnd.Next(6, 11);
+            Console.WriteLine();
             for (int i = 0; i < nbRandom; i++)
             {
                 Visiteur visiteur = Visiteur.CreerVisiteurAleatoire();

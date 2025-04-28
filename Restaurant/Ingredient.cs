@@ -2,24 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Restaurant
 {
-    public partial class Ingredient
+    public enum Qualite
+    {
+        Moyenne,
+        Bonne,
+        Excellente
+    }
+    public class Ingredient
     {
         public string Nom { get; set; }
-        public double PrixAchat { get; set; }
+        public float PrixAchat { get; set; }
+        public int Calorie { get; set; }
+        public Qualite QualiteIng { get; set; }
 
-        public Ingredient(string nom, double achatP)
+
+        [JsonConstructor]
+        public Ingredient(string nom, float prixAchat, int calorie, string qualiteIng)
         {
-            this.Nom = nom;
-            this.PrixAchat = achatP;
+            Nom = nom;
+            PrixAchat = prixAchat;
+            Calorie = calorie;
+
+            if (qualiteIng.Contains("Moyenne"))
+                QualiteIng = Qualite.Moyenne;
+            else if (qualiteIng.Contains("Bonne"))
+                QualiteIng = Qualite.Bonne;
+            else if (qualiteIng.Contains("Excellente"))
+                QualiteIng = Qualite.Excellente;
+            else
+                QualiteIng = Qualite.Moyenne;
         }
 
         public override string ToString()
         {
-            return $"[Nom] : {Nom}, [prix] : {PrixAchat}$";
+            return $"[Nom] : {Nom}, [prix] : {PrixAchat}$, [Calorie] : {Calorie}, [Qualite] : {QualiteIng} :)";
         }
     }
 }
