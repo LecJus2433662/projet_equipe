@@ -9,14 +9,15 @@ namespace Restaurant
 {
     public class Plat
     {
-        List<Ingredient> ing { get; set; }
+        List<Ingredient> ingrediantDispo;
+        List<Ingredient> ingredientsPlat;
         string Nom { get; set; }
         double PrixIngredient { get; set; }
         public double PrixAchat { get; private set; }
 
         public Plat(string nom, double prixIng)
         {
-            ing = new List<Ingredient>();
+            ingrediantDispo = JsonFileLoader.ChargerFichier<List<Ingredient>>(@"..\..\..\..\json_ingredient.json");
             this.Nom = nom;
             this.PrixIngredient = prixIng;
         }
@@ -25,7 +26,7 @@ namespace Restaurant
         {
             double result = 0;
 
-            foreach (Ingredient ingredient in ing)
+            foreach (Ingredient ingredient in ingrediantDispo)
             {
                 result += ingredient.PrixAchat;
             }
@@ -36,7 +37,7 @@ namespace Restaurant
         {
             double prixFinal = 0;
             double taxeUni = 1.5;
-            foreach (var ingredient in ing)
+            foreach (var ingredient in ingrediantDispo)
             {
                 if(ingredient.QualiteIng == Qualite.Excellente)
                     taxeUni += 3;
@@ -49,12 +50,15 @@ namespace Restaurant
             return prixFinal;
         }
 
-        private string InfoPlat()
+        public string InfoIngrediantDispo()
         {
             string afficher = "";
-            foreach (Ingredient filmAfficher in ing)
+            int num = 1;
+            foreach (Ingredient ingrediant in ingrediantDispo)
             {
-                afficher += filmAfficher + "\n";
+                afficher += "\t" + num + ":";
+                afficher +=  ingrediant +  "\n";
+                num++;
             }
             return afficher;
         }
