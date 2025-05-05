@@ -8,10 +8,10 @@ namespace Restaurant
 {
     public class Resto
     {
-        int total {  get; set; }
-       
-        
-        
+        int total { get; set; }
+
+
+
         public Resto()
         {
             total = 10000;
@@ -25,23 +25,22 @@ namespace Restaurant
             Console.WriteLine($"{platMatin}\n");
             Random rnd = new Random();
             int nbRandom = rnd.Next(6, 11);
-            Console.WriteLine();
-            for (int i = 0; i < nbRandom; i++)
-            {
-            Client client = new Client();
-                Visiteur visiteur = Visiteur.CreerVisiteurAleatoire();
-               client.AjouterVisiteur(visiteur);
-              
-            }
-            Menu menu = new Menu();
-            Plat plat = new Plat("",34);
-            menu.AjouterPlat(plat);
-            Console.WriteLine(client);
 
+            Console.WriteLine("************************************  Employer Mystère  ****************************************************");
+            Console.WriteLine("Appuyer sur ENTER pour faire apparaitre votre employer");
+            Console.ReadLine();
+            EngagerEmployer employer = new EngagerEmployer("M.Bernard");
+            Console.WriteLine(employer);
+            Console.WriteLine("************************************  Employer Mystère  ****************************************************");
+
+
+            Menu menu = new Menu();
+            Plat plat = new Plat("", 34);
+            menu.AjouterPlat(plat);
         }
 
 
-        
+
 
 
     }
