@@ -25,14 +25,11 @@ namespace Restaurant
             Console.WriteLine($"{platMatin}\n");
             Random rnd = new Random();
             int nbRandom = rnd.Next(6, 11);
-<<<<<<< HEAD
-=======
             Console.WriteLine();
            
             Menu menu = new Menu();
             Plat plat = new Plat("",34);
             Console.WriteLine(plat.InfoIngrediantDispo());
->>>>>>> justinbranche
 
             Console.WriteLine("************************************  Employer Mystère  ****************************************************");
             Console.WriteLine("Appuyer sur ENTER pour faire apparaitre votre employer");
@@ -42,9 +39,7 @@ namespace Restaurant
             Console.WriteLine("************************************  Employer Mystère  ****************************************************");
 
 
-            Menu menu = new Menu();
-            Plat plat = new Plat("", 34);
-            menu.AjouterPlat(plat);
+
         }
 
 
