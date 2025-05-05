@@ -22,21 +22,21 @@ namespace Restaurant
 
 
         [JsonConstructor]
-        public Ingredient(string nom, float prixAchat, int calorie, string qualiteIng)
+        public Ingredient(string nom, float prix, int calories, string qualite)
         {
             Nom = nom;
-            PrixAchat = prixAchat;
-            Calorie = calorie;
+            Calorie = calories;
+            
 
-            if (qualiteIng.Contains("Moyenne"))
+            if (qualite.Contains("Moyenne"))
             {
                 QualiteIng = Qualite.Moyenne;
             }
-            else if (qualiteIng.Contains("Bonne"))
+            else if (qualite.Contains("Bonne"))
             {
                 QualiteIng = Qualite.Bonne;
             }
-            else if (qualiteIng.Contains("Excellente"))
+            else if (qualite.Contains("Excellente"))
             {
                 QualiteIng = Qualite.Excellente;
             }
@@ -44,11 +44,14 @@ namespace Restaurant
             {
                 QualiteIng = Qualite.Moyenne;
             }
+        
+            PrixAchat = prix;
         }
 
         public override string ToString()
         {
-            return $"[Nom] : {Nom}, [prix] : {PrixAchat}$, [Calorie] : {Calorie}, [Qualite] : {QualiteIng}";
+            string info = $"[Nom] : {Nom}, [prix] : {PrixAchat}$, [Calorie] : {Calorie}, [Qualite] : {QualiteIng}";
+            return info;
         }
     }
 }

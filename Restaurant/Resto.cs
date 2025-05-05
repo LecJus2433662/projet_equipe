@@ -26,17 +26,10 @@ namespace Restaurant
             Random rnd = new Random();
             int nbRandom = rnd.Next(6, 11);
             Console.WriteLine();
-            for (int i = 0; i < nbRandom; i++)
-            {
-            Client client = new Client();
-                Visiteur visiteur = Visiteur.CreerVisiteurAleatoire();
-               client.AjouterVisiteur(visiteur);
-              
-            }
+           
             Menu menu = new Menu();
             Plat plat = new Plat("",34);
-            menu.AjouterPlat(plat);
-            Console.WriteLine(client);
+            Console.WriteLine(plat.InfoIngrediantDispo());
 
         }
 
