@@ -9,17 +9,18 @@ namespace Restaurant
 {
     public class Plat
     {
-        List<Ingredient> ingrediantDispo;
-        List<Ingredient> ingredientsPlat;
+       public List<Ingredient> ingrediantDispo;
+       public List<Ingredient> ingredientsPlat;
         string Nom { get; set; }
         double PrixIngredient { get; set; }
         public double PrixAchat { get; private set; }
 
-        public Plat(string nom, double prixIng)
+        public Plat(string nom)
         {
             ingrediantDispo = JsonFileLoader.ChargerFichier<List<Ingredient>>(@"..\..\..\..\json_ingredient.json");
+            ingredientsPlat = new List<Ingredient>();
             this.Nom = nom;
-            this.PrixIngredient = prixIng;
+            PrixAchat = CalculerVente();
         }
 
         public double CalculerCout()
@@ -64,7 +65,7 @@ namespace Restaurant
         }
         public override string ToString()
         {
-            return $"Nom du plat : {Nom}, Prix des ingrédients : {PrixIngredient}\n";
+            return $"Nom du plat : {Nom}, Prix : {PrixAchat}\n";
         }
     }
 }

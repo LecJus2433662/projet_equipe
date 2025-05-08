@@ -32,5 +32,9 @@ namespace Restaurant
             }
             return afficher;
         }
+        public override string ToString()
+        {
+            return GetInfoPlat();
+        }
     }
 }
