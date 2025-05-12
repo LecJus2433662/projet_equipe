@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Restaurant
@@ -12,35 +13,28 @@ namespace Restaurant
         bool end;
         Plat IngredientsPourPlat = new Plat("");
 
-        Menu menuBasique = new Menu();
+        Menu menu = new Menu();
         Plat spaghetti = new Plat("Spaghetti");
         Plat omelette = new Plat("Omelette");
         Plat clubSandwich = new Plat("Club Sandwich");
+     
 
-        Menu menuFancy = new Menu();
-        Plat wagyu = new Plat("Wagyu Beef Aux Poivre");
-        Plat soupeRequin = new Plat("Soupe Au Requin Blanc");
-        Plat pouletAuBeurre = new Plat("Poulet Au Beurre");
         public Resto()
         {
-            menuBasique.AjouterPlat(omelette);
-            menuBasique.AjouterPlat(spaghetti);
-            menuBasique.AjouterPlat(clubSandwich);
+            menu.AjouterPlat(omelette);
+            menu.AjouterPlat(spaghetti);
+            menu.AjouterPlat(clubSandwich);
 
-            menuFancy.AjouterPlat(wagyu);
-            menuFancy.AjouterPlat(soupeRequin);
-            menuFancy.AjouterPlat(pouletAuBeurre);
-            // metre tout ça dans une fonction
             total = 1000;
             end = true;
             Console.WriteLine("Appuyer sur ENTER pour afficher votre menu");
             Console.ReadLine();
             Console.Clear();
-            // alexis fait 1,2,6 pi les autre on les fait ensemble
+
             while (end)
             {
                 Console.Clear();
-                Console.WriteLine("1: afficher menu");
+                Console.WriteLine("1: afficher menu basique");
                 Console.WriteLine("2: afficher status restaurant");
                 Console.WriteLine("3: ajuster menu");
                 Console.WriteLine("4: acheter nouveau plat");
@@ -48,6 +42,7 @@ namespace Restaurant
                 Console.WriteLine("6: info clients");
                 Console.WriteLine("7: servir clients");
                 Console.WriteLine("8: finir la journée");
+                Console.WriteLine("0: Mystère ???");
                 string choix = Console.ReadLine();
 
 
@@ -55,18 +50,20 @@ namespace Restaurant
                 {
 
                     case "1":
-                        int isdfs = 0;
-                        foreach (Ingredient ingredient in IngredientsPourPlat.ingredientsPlat)
-                        {
-                            isdfs++;
-                        }
-                        Console.WriteLine(isdfs);
+                        Console.WriteLine(menu);
+                        Thread.Sleep(5000);
                         break;
                     case "2":
+                        Thread.Sleep(5000);
+
                         break;
                     case "3":
+                        Thread.Sleep(5000);
+
                         break;
                     case "4":
+                        Thread.Sleep(5000);
+
                         break;
                     case "5":
                         bool AssezArgent = true;
@@ -104,8 +101,6 @@ namespace Restaurant
                                 Console.WriteLine("Ce n'est pas un ingrédient ");
                             }
                         }
-
-
                         break;
 
                     case "6":
@@ -116,23 +111,22 @@ namespace Restaurant
                         Console.WriteLine("fin de la journée");
                         end = false;
                         break;
-
+                    case "0":
+                        EmployerMystere();
+                        Thread.Sleep(5000);
+                        break;
 
                 }
             }
-
-
-            Console.WriteLine("************************************  Employer Mystère  ****************************************************\n");
-            Console.WriteLine("Appuyer sur ENTER pour faire apparaitre votre employer");
-            Console.ReadLine();
-            EngagerEmployer employer = new EngagerEmployer("M.Bernard");
-            Console.WriteLine(employer);
+            void EmployerMystere()
+            {
+                Console.WriteLine("************************************  Employer Mystère  ****************************************************\n");
+                Console.WriteLine("Appuyer sur ENTER pour faire apparaitre votre employer");
+                Console.ReadLine();
+                EngagerEmployer employer = new EngagerEmployer("M.Bernard");
+                Console.WriteLine(employer);
+            }
 
         }
-
-
-
-
-
     }
 }

@@ -55,6 +55,8 @@ namespace Restaurant
 
             }
             return $"L'employer mystérieux est de rareter : [{rareter}] et il s'appelle : [{Nom}]\nVous avez droit à une belle réduction de : {nouveauPrix}$";
+
+
         }
 
         public override string ToString()
