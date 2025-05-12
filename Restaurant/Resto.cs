@@ -12,22 +12,45 @@ namespace Restaurant
     {
         float Total { get; set; }
         bool end;
-        Plat IngredientsPourPlat = new Plat("");
+        Plat IngredientsPourPlat;
 
-        Menu menu = new Menu("Menu Chez resto");
-        Plat spaghetti = new Plat("Spaghetti");
-        Plat omelette = new Plat("Omelette");
-        Plat clubSandwich = new Plat("Club Sandwich");
-     
+        Menu menu;
+        Plat spaghetti;
+        Plat omelette;
+        Plat clubSandwich;
 
-       
+
+
+
         public Resto()
+        {
+            menu = new Menu("Menu chez resto");
+            IngredientsPourPlat = new Plat("");
+            spaghetti = new Plat("Spaghetti");
+            omelette = new Plat("Omelette");
+            clubSandwich = new Plat("Club Sandwich");
+            AfficherMenu();
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+        void AfficherMenu()
         {
             menu.AjouterPlat(omelette);
             menu.AjouterPlat(spaghetti);
             menu.AjouterPlat(clubSandwich);
 
-           
+
             Total = 1000;
             end = true;
             Console.WriteLine("Appuyer sur ENTER pour afficher votre menu");
@@ -39,14 +62,13 @@ namespace Restaurant
                 Console.Clear();
                 Console.WriteLine("1: afficher menu basique");
                 Console.WriteLine("2: afficher status restaurant");
-                Console.WriteLine("3: ajuster menu");
-                Console.WriteLine("4: acheter nouveau plat");
-                Console.WriteLine("5: commander ingrediant");
-                Console.WriteLine("6: info clients");
-                Console.WriteLine("7: servir clients");
-                Console.WriteLine("8: finir la journée");
+                Console.WriteLine("3: acheter nouveau plat");
+                Console.WriteLine("4: commander ingrediant");
+                Console.WriteLine("5: info clients");
+                Console.WriteLine("6: servir clients");
+                Console.WriteLine("7: finir la journée");
                 Console.WriteLine("0: Mystère ???");
-               
+
                 string choix = Console.ReadLine();
 
 
@@ -62,20 +84,15 @@ namespace Restaurant
                         Console.WriteLine($"Vous avez un total de : {Total}$");
                         Thread.Sleep(5000);
                         break;
-                    
                     case "3":
-                        Thread.Sleep(5000);
-
-                        break;
-                    case "4":
                         Thread.Sleep(5000);
                         Console.WriteLine("Quelle est le nom du plat que vous voulez acheter?");
                         string plat = Console.ReadLine();
                         Plat nouveauPlat = new Plat(plat);
                         while (true)
                         {
-                        Console.WriteLine($"Quelle ingrédiant voulez-vous dans le plat? appuyer sur 0 pour finir le plat");
-                            Console.WriteLine(IngredientsPourPlat.InfoIngrediantDispo()); 
+                            Console.WriteLine($"Quelle ingrédiant voulez-vous dans le plat? appuyer sur 0 pour finir le plat");
+                            Console.WriteLine(IngredientsPourPlat.InfoIngrediantDispo());
 
                             int.TryParse(Console.ReadLine(), out int choice);
                             if (choice == 0)
@@ -88,20 +105,21 @@ namespace Restaurant
                                 int.TryParse(Console.ReadLine(), out int nbIngrediant);
                                 for (int i = 0; i < nbIngrediant; i++)
                                 {
-                                nouveauPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
+                                    nouveauPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
 
                                 }
-                               
+
                             }
                             if (choice > 20)
                             {
                                 Console.WriteLine("Ce n'est pas un ingrédient ");
                             }
+                            menu.AjouterPlat(nouveauPlat);
                         }
 
 
                         break;
-                    case "5":
+                    case "4":
                         bool AssezArgent = true;
                         Console.WriteLine("voici la liste des ingrédients disponible:");
                         while (AssezArgent)
@@ -139,6 +157,8 @@ namespace Restaurant
                         }
                         break;
 
+                    case "5":
+                        break;
                     case "6":
 
                         break;
