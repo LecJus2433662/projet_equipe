@@ -65,7 +65,7 @@ namespace Restaurant
         }
         public override string ToString()
         {
-            return $"Nom du plat : {Nom}, Prix : {PrixAchat}\n";
+            return $"Nom du plat : {Nom}, Prix : {PrixAchat:F2}$\n";
         }
     }
 }
