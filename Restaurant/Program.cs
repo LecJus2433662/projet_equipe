@@ -7,8 +7,6 @@ namespace Restaurant
         static void Main(string[] args)
         {
             Resto resto = new Resto();
-
-
         }
     }
 }
