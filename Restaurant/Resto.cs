@@ -10,11 +10,11 @@ namespace Restaurant
 {
     public class Resto
     {
-        float total { get; set; }
+        float Total { get; set; }
         bool end;
         Plat IngredientsPourPlat = new Plat("");
 
-        Menu menu = new Menu();
+        Menu menu = new Menu("Menu Chez resto");
         Plat spaghetti = new Plat("Spaghetti");
         Plat omelette = new Plat("Omelette");
         Plat clubSandwich = new Plat("Club Sandwich");
@@ -28,8 +28,7 @@ namespace Restaurant
             menu.AjouterPlat(clubSandwich);
 
            
-            // metre tout ça dans une fonction
-            total = 1000;
+            Total = 1000;
             end = true;
             Console.WriteLine("Appuyer sur ENTER pour afficher votre menu");
             Console.ReadLine();
@@ -59,8 +58,9 @@ namespace Restaurant
                         Thread.Sleep(5000);
                         break;
                     case "2":
+                        Console.WriteLine(menu);
+                        Console.WriteLine($"Vous avez un total de : {Total}$");
                         Thread.Sleep(5000);
-
                         break;
                     
                     case "3":
@@ -106,7 +106,7 @@ namespace Restaurant
                         Console.WriteLine("voici la liste des ingrédients disponible:");
                         while (AssezArgent)
                         {
-                            Console.WriteLine($"total argent :{total}");
+                            Console.WriteLine($"total argent :{Total}");
                             Console.WriteLine(IngredientsPourPlat.InfoIngrediantDispo());
                             Console.WriteLine("Quel ingrédient voulez-vous acheter? appuyer sur 0 pour quitter");
                             int.TryParse(Console.ReadLine(), out int choice);
@@ -120,14 +120,14 @@ namespace Restaurant
                                 int.TryParse(Console.ReadLine(), out int achat);
                                 for (int i = 0; i < achat; i++)
                                 {
-                                    if (total >= IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat)
+                                    if (Total >= IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat)
                                     {
-                                        total -= IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat;
+                                        Total -= IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat;
                                         IngredientsPourPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
                                     }
 
                                 }
-                                if (total < IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat)
+                                if (Total < IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat)
                                 {
                                     Console.WriteLine("T trop pauvre pour acheter plus d'ingrédient");
                                 }
@@ -140,10 +140,9 @@ namespace Restaurant
                         break;
 
                     case "6":
+
                         break;
                     case "7":
-                        break;
-                    case "8":
                         Console.WriteLine("fin de la journée");
                         end = false;
                         break;

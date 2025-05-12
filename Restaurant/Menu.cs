@@ -9,13 +9,14 @@ namespace Restaurant
     public class Menu
     {
         List<Plat> plats;
+        string Nom { get; set; }
 
 
 
-
-        public Menu()
+        public Menu(string nom)
         {
-            plats = new List<Plat>(); 
+            plats = new List<Plat>();
+            Nom = nom;
         }
 
         public void AjouterPlat(Plat plat)
@@ -34,7 +35,7 @@ namespace Restaurant
         }
         public override string ToString()
         {
-            return GetInfoPlat();
+            return $"Votre menu s'appelle - [{Nom}]\n\n" + GetInfoPlat();
         }
     }
 }
