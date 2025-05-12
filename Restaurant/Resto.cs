@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,14 +18,23 @@ namespace Restaurant
         Plat spaghetti = new Plat("Spaghetti");
         Plat omelette = new Plat("Omelette");
         Plat clubSandwich = new Plat("Club Sandwich");
+<<<<<<< HEAD
      
 
+=======
+       
+>>>>>>> justinbranche
         public Resto()
         {
             menu.AjouterPlat(omelette);
             menu.AjouterPlat(spaghetti);
             menu.AjouterPlat(clubSandwich);
 
+<<<<<<< HEAD
+=======
+           
+            // metre tout ça dans une fonction
+>>>>>>> justinbranche
             total = 1000;
             end = true;
             Console.WriteLine("Appuyer sur ENTER pour afficher votre menu");
@@ -36,6 +46,7 @@ namespace Restaurant
                 Console.Clear();
                 Console.WriteLine("1: afficher menu basique");
                 Console.WriteLine("2: afficher status restaurant");
+<<<<<<< HEAD
                 Console.WriteLine("3: ajuster menu");
                 Console.WriteLine("4: acheter nouveau plat");
                 Console.WriteLine("5: commander ingrediant");
@@ -43,6 +54,13 @@ namespace Restaurant
                 Console.WriteLine("7: servir clients");
                 Console.WriteLine("8: finir la journée");
                 Console.WriteLine("0: Mystère ???");
+=======
+                Console.WriteLine("3: acheter nouveau plat");
+                Console.WriteLine("4: commander ingrediant");
+                Console.WriteLine("5: info clients");
+                Console.WriteLine("6: servir clients");
+                Console.WriteLine("7: finir la journée");
+>>>>>>> justinbranche
                 string choix = Console.ReadLine();
 
 
@@ -50,19 +68,56 @@ namespace Restaurant
                 {
 
                     case "1":
+<<<<<<< HEAD
                         Console.WriteLine(menu);
                         Thread.Sleep(5000);
+=======
+                       
+>>>>>>> justinbranche
                         break;
                     case "2":
                         Thread.Sleep(5000);
 
                         break;
+                    
                     case "3":
+<<<<<<< HEAD
                         Thread.Sleep(5000);
 
                         break;
                     case "4":
                         Thread.Sleep(5000);
+=======
+                        Console.WriteLine("Quelle est le nom du plat que vous voulez acheter?");
+                        string plat = Console.ReadLine();
+                        Plat nouveauPlat = new Plat(plat);
+                        while (true)
+                        {
+                        Console.WriteLine($"Quelle ingrédiant voulez-vous dans le plat? appuyer sur 0 pour finir le plat");
+                            IngredientsPourPlat.InfoIngrediantDispo();
+                            int.TryParse(Console.ReadLine(), out int choice);
+                            if (choice == 0)
+                            {
+                                break;
+                            }
+                            if (choice >= 1 && choice <= 20)
+                            {
+                                Console.WriteLine($"combien de {IngredientsPourPlat.ingrediantDispo[choice - 1]} voulez-vous avoir?");
+                                int.TryParse(Console.ReadLine(), out int nbIngrediant);
+                                for (int i = 0; i < nbIngrediant; i++)
+                                {
+                                nouveauPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
+
+                                }
+                               
+                            }
+                            if (choice > 20)
+                            {
+                                Console.WriteLine("Ce n'est pas un ingrédient ");
+                            }
+                        }
+
+>>>>>>> justinbranche
 
                         break;
                     case "5":
