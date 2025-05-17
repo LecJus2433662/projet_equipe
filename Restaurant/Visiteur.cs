@@ -19,9 +19,9 @@ namespace Restaurant
         Temperament temperament;
 
 
-        public Visiteur(Temperament temperamente)
+        public Visiteur()
         {
-            this.temperament = temperamente;
+           
         }
 
         public void CreerNom()
@@ -56,7 +56,7 @@ namespace Restaurant
                     break;
             }
 
-            Visiteur visiteur = new Visiteur(temperament);
+            Visiteur visiteur = new Visiteur();
             visiteur.CreerNom();
             return visiteur;
         }

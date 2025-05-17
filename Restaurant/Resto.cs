@@ -47,9 +47,24 @@ namespace Restaurant
         void AfficherMenu()
         {
             menu.AjouterPlat(omelette);
-            menu.AjouterPlat(spaghetti);
-            menu.AjouterPlat(clubSandwich);
+            omelette.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[2]);
+            omelette.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[2]);
+            omelette.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[2]);
+            omelette.PrixAchat = omelette.CalculerVente();
 
+
+            menu.AjouterPlat(spaghetti);
+            spaghetti.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[15]);
+            spaghetti.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[10]);
+            spaghetti.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[13]);
+            spaghetti.PrixAchat = spaghetti.CalculerVente();
+
+            menu.AjouterPlat(clubSandwich);
+            clubSandwich.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[17]);
+            clubSandwich.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[18]);
+            clubSandwich.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[12]);
+            clubSandwich.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[10]);
+            clubSandwich.PrixAchat = clubSandwich.CalculerVente();
 
             Total = 1000;
             end = true;
@@ -81,11 +96,10 @@ namespace Restaurant
                         break;
                     case "2":
                         Console.WriteLine(menu);
-                        Console.WriteLine($"Vous avez un total de : {Total}$");
+                        Console.WriteLine($"Vous avez un total de : {Total:f2}$");
                         Thread.Sleep(5000);
                         break;
                     case "3":
-                        Thread.Sleep(5000);
                         Console.WriteLine("Quelle est le nom du plat que vous voulez acheter?");
                         string plat = Console.ReadLine();
                         Plat nouveauPlat = new Plat(plat);
@@ -105,15 +119,15 @@ namespace Restaurant
                                 int.TryParse(Console.ReadLine(), out int nbIngrediant);
                                 for (int i = 0; i < nbIngrediant; i++)
                                 {
-                                    nouveauPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
-
+                                    nouveauPlat.ingredientsPlat.Add(nouveauPlat.ingrediantDispo[choice - 1]);
                                 }
-
+                               
                             }
                             if (choice > 20)
                             {
                                 Console.WriteLine("Ce n'est pas un ingrédient ");
                             }
+                            nouveauPlat.PrixAchat = nouveauPlat.CalculerVente();
                             menu.AjouterPlat(nouveauPlat);
                         }
 
@@ -124,7 +138,7 @@ namespace Restaurant
                         Console.WriteLine("voici la liste des ingrédients disponible:");
                         while (AssezArgent)
                         {
-                            Console.WriteLine($"total argent :{Total}");
+                            Console.WriteLine($"total argent :{Total:f2}");
                             Console.WriteLine(IngredientsPourPlat.InfoIngrediantDispo());
                             Console.WriteLine("Quel ingrédient voulez-vous acheter? appuyer sur 0 pour quitter");
                             int.TryParse(Console.ReadLine(), out int choice);
