@@ -13,6 +13,7 @@ namespace Restaurant
         Bonne,
         Excellente
     }
+
     public class Ingredient
     {
         public string Nom { get; set; }
@@ -20,38 +21,22 @@ namespace Restaurant
         public int Calorie { get; set; }
         public Qualite QualiteIng { get; set; }
 
-
         [JsonConstructor]
         public Ingredient(string nom, float prix, int calories, string qualite)
         {
             Nom = nom;
-            Calorie = calories;
-            
-
-            if (qualite.Contains("Moyenne"))
-            {
-                QualiteIng = Qualite.Moyenne;
-            }
-            else if (qualite.Contains("Bonne"))
-            {
-                QualiteIng = Qualite.Bonne;
-            }
-            else if (qualite.Contains("Excellente"))
-            {
-                QualiteIng = Qualite.Excellente;
-            }
-            else
-            {
-                QualiteIng = Qualite.Moyenne;
-            }
-        
             PrixAchat = prix;
+            Calorie = calories;
+
+            if (qualite.Contains("Moyenne")) QualiteIng = Qualite.Moyenne;
+            else if (qualite.Contains("Bonne")) QualiteIng = Qualite.Bonne;
+            else if (qualite.Contains("Excellente")) QualiteIng = Qualite.Excellente;
+            else QualiteIng = Qualite.Moyenne;
         }
 
         public override string ToString()
         {
-            string info = $"[Nom] : {Nom}, [prix] : {PrixAchat}$, [Calorie] : {Calorie}, [Qualite] : {QualiteIng}";
-            return info;
+            return $"[Nom] : {Nom}, [prix] : {PrixAchat}$, [Calorie] : {Calorie}, [Qualite] : {QualiteIng}";
         }
     }
 }

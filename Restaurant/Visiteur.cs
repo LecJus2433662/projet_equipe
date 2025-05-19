@@ -14,15 +14,12 @@ namespace Restaurant
             MediumBoy,
             BadBoy
         }
+
         string nom;
         string prenom;
         Temperament temperament;
 
-
-        public Visiteur()
-        {
-           
-        }
+        public Visiteur() { }
 
         public void CreerNom()
         {
@@ -37,35 +34,27 @@ namespace Restaurant
                 Console.WriteLine($"Erreur : {ex.Message}");
             }
         }
+
         public static Visiteur CreerVisiteurAleatoire()
         {
             Random random = new Random();
             int rnd = random.Next(1, 4);
-            Temperament temperament;
-            switch (rnd)
+            Temperament temperament = rnd switch
             {
-                case 1:
-                    temperament = Temperament.GoodBoy;
-                    break;
-                case 2:
-                    temperament = Temperament.BadBoy;
-                    break;
-                case 3:
-                default:
-                    temperament = Temperament.MediumBoy;
-                    break;
-            }
+                1 => Temperament.GoodBoy,
+                2 => Temperament.BadBoy,
+                _ => Temperament.MediumBoy,
+            };
 
             Visiteur visiteur = new Visiteur();
+            visiteur.temperament = temperament;
             visiteur.CreerNom();
             return visiteur;
         }
 
-
-
         public override string ToString()
         {
-            return $"\t{prenom,-10} {nom,-10} - {temperament}\n";
+            return $"	{prenom,-10} {nom,-10} - {temperament}\n";
         }
     }
 }
