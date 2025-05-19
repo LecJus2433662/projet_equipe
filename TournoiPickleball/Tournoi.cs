@@ -68,15 +68,15 @@ namespace TournoiPickleball
                 switch (choix)
                 {
                     case "1":
-                        equipeEleves.AfficherStats();
-                        equipeProfs.AfficherStats();
+                        Console.Write(equipeEleves);
+                        Console.Write(equipeProfs);
                         Console.ReadKey();
                         break;
 
                     case "2":
                         foreach (Joueur joueur in tousLesJoueurs)
                         {
-                            joueur.AfficherStatistiques();
+                            Console.WriteLine(joueur);
                         }
                         Console.ReadKey();
                         break;
@@ -113,12 +113,12 @@ namespace TournoiPickleball
             Console.WriteLine("===== Classement des joueurs par niveau =====\n");
 
             List<Joueur> joueursTries = tousLesJoueurs.OrderByDescending(joueur => joueur.Niveau).ThenByDescending(joueur => joueur.Experience).ToList();
-            int rang = 1;
+            int niveau = 1;
 
             foreach (Joueur joueur in joueursTries)
             {
-                Console.WriteLine($"{rang}. {joueur.Nom,-20} | Niveau : {joueur.Niveau,-2} | Expérience : {joueur.Experience} XP");
-                rang++;
+                Console.WriteLine($"{niveau}. {joueur.Nom,-20} | Niveau : {joueur.Niveau,-2} | Expérience : {joueur.Experience} XP");
+                niveau++;
             }
         }
 

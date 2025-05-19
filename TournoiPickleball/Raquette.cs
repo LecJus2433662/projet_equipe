@@ -21,25 +21,7 @@ namespace TournoiPickleball
             Durabilite = durabiliteMax;
         }
 
-        public virtual void AfficherEtat()
-        {
-            Console.WriteLine($"Raquette {Marque} - Durabilité : {Durabilite}/{DurabiliteMax}");
-
-            double ratio = Durabilite / DurabiliteMax;
-
-            if (ratio >= 0.61)
-            {
-                Console.WriteLine("Raquette prête à l’utilisation !");
-            }
-            else if (ratio >= 0.31)
-            {
-                Console.WriteLine("Votre raquette commence à s’user. Pensez à la faire vérifier bientôt.");
-            }
-            else
-            {
-                Console.WriteLine("Raquette en mauvais état. Réparation urgente recommandée !");
-            }
-        }
+        
 
         public void UserRaquette(int quantite)
         {
@@ -48,6 +30,27 @@ namespace TournoiPickleball
             {
                 Durabilite = 0;
             }
+        }
+        public override string ToString()
+        {
+            string etat = "";
+            etat = $"Raquette {Marque} - Durabilité : {Durabilite}/{DurabiliteMax}\n";
+
+            double ratio = Durabilite / DurabiliteMax;
+
+            if (ratio >= 0.61)
+            {
+                etat += "Raquette prête à l’utilisation !";
+            }
+            else if (ratio >= 0.31)
+            {
+                etat += "Votre raquette commence à s’user. Pensez à la faire vérifier bientôt.";
+            }
+            else
+            {
+                etat += "Raquette en mauvais état. Réparation urgente recommandée !";
+            }
+            return etat; 
         }
     }
 }

@@ -34,8 +34,8 @@ namespace TournoiPickleball
         public void AfficherStats()
         {
             Console.WriteLine($"--- {NomEquipe} ---");
-            Joueur1.AfficherStatistiques();
-            Joueur2.AfficherStatistiques();
+            Console.WriteLine(Joueur1);
+            Console.WriteLine(Joueur2);
         }
 
         public void RecompenseGagnants()
@@ -82,12 +82,21 @@ namespace TournoiPickleball
             }
 
             Console.WriteLine($"L'équipe gagnante est : {gagnante.NomEquipe} !");
+            
             gagnante.RecompenseGagnants();
 
             gagnante.Joueur1.Raquette.UserRaquette(10);
             gagnante.Joueur2.Raquette.UserRaquette(10);
 
             return gagnante;
+        }
+        public override string ToString()
+        {
+            string info = "";
+            info = $"--- {NomEquipe} ---\n";
+            info += Joueur1;
+            info += Joueur2;
+            return info;
         }
     }
 }

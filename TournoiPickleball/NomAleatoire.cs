@@ -20,11 +20,18 @@ namespace TournoiPickleball
 
         static Random rand = new Random();
 
+
+
+
         public static string GetNomComplet()
         {
             string prenom = prenoms[rand.Next(prenoms.Count)];
             string nom = nomsFamille[rand.Next(nomsFamille.Count)];
             return prenom + " " + nom;
         }
+        
+
+        
     }
+    
 }

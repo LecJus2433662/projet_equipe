@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace TournoiPickleball
 {
-    public enum NiveauExperience
-    {
-        debutant,
-        intermediaire,
-        professionnel 
-    }
+
     public enum TypeJoueur
     {
         Eleve,
@@ -20,13 +15,9 @@ namespace TournoiPickleball
 
     public class Joueur
     {
-        string nom {  get; }
-        int force {  get; set; }
-        int dexterite {  get; set; }
-        NiveauExperience NiveauExperience { get; set; }
-        Random Random { get; set; }
 
-        
+
+
         public string Nom { get; private set; }
         public TypeJoueur Type { get; private set; }
         public int Experience { get; private set; }
@@ -52,22 +43,23 @@ namespace TournoiPickleball
             Aura += points;
         }
 
-        public void AfficherStatistiques()
-        {
-            Console.WriteLine($"{Nom} ({Type})");
-            Console.WriteLine($"→ Niveau : {Niveau}");
-            Console.WriteLine($"→ Expérience : {Experience}");
-            Console.WriteLine($"→ Aura : {Aura}");
-            Raquette.AfficherEtat();
-            Console.WriteLine();
-        }
+
 
         public int Niveau
         {
             get { return Experience / 50; }
         }
+        public override string ToString()
+        {
+            string info = "";
+            info = $"\n{Nom} ({Type})\n";
+            info += $"→ Niveau : {Niveau}\n";
+            info += $"→ Expérience : {Experience}\n";
+            info += $"→ Aura : {Aura} \n";
+            info +=  Raquette + "\n";
+            return info;
+        }
 
-       
 
     }
 }
