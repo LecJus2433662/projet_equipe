@@ -11,23 +11,22 @@ namespace Restaurant
     {
         public List<Ingredient> ingrediantDispo;
         public List<Ingredient> ingredientsPlat;
-        string Nom { get; set; }
-        double PrixIngredient { get; set; }
-        public double PrixAchat { get; set; }
+        public string Nom { get; private set; }
+        private double PrixIngredient { get; set; }
+        public double PrixAchat { get; private set; }
 
         public Plat(string nom)
         {
             ingrediantDispo = JsonFileLoader.ChargerFichier<List<Ingredient>>(@"..\..\..\..\json_ingredient.json");
             ingredientsPlat = new List<Ingredient>();
-            this.Nom = nom;
+            Nom = nom;
             PrixAchat = CalculerVente();
         }
 
         public double CalculerCout()
         {
             double result = 0;
-
-            foreach (Ingredient ingredient in ingredientsPlat)
+            foreach (Ingredient ingredient in ingrediantDispo)
             {
                 result += ingredient.PrixAchat;
             }
@@ -38,15 +37,14 @@ namespace Restaurant
         {
             double prixFinal = 0;
             double taxeUni = 1.5;
-            foreach (var ingredient in ingredientsPlat)
+
+            foreach (Ingredient ingredient in ingrediantDispo)
             {
-                if (ingredient.QualiteIng == Qualite.Excellente)
-                    taxeUni += 3;
-                else if (ingredient.QualiteIng == Qualite.Moyenne)
-                    taxeUni += 2;
-                else
-                    taxeUni += 1;
+                if (ingredient.QualiteIng == Qualite.Excellente) taxeUni += 3;
+                else if (ingredient.QualiteIng == Qualite.Moyenne) taxeUni += 2;
+                else taxeUni += 1;
             }
+
             prixFinal = CalculerCout() * taxeUni;
             return prixFinal;
         }
@@ -55,14 +53,16 @@ namespace Restaurant
         {
             string afficher = "";
             int num = 1;
+
             foreach (Ingredient ingrediant in ingrediantDispo)
             {
-                afficher += "\t" + num + ":";
-                afficher += ingrediant + "\n";
+                afficher += "\t" + num + ":" + ingrediant + "\n";
                 num++;
             }
+
             return afficher;
         }
+
         public override string ToString()
         {
             return $"Nom du plat : {Nom}, Prix : {PrixAchat:F2}$\n";

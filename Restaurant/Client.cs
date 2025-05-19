@@ -8,14 +8,15 @@ namespace Restaurant
 {
     public class Client
     {
-        
         List<Visiteur> visiteurs;
-        
+        string Nom { get; set; }
 
-        public Client()
+        public Client(string nom)
         {
-       
+            Nom = nom;
+            visiteurs = new List<Visiteur>();
         }
+
         public void AjouterVisiteur(Visiteur visiteur)
         {
             visiteurs.Add(visiteur);
@@ -33,7 +34,12 @@ namespace Restaurant
 
         public override string ToString()
         {
-            return $"\n{visiteurs}";
+            string info = $"Nom du client : {Nom}\n";
+            foreach (var v in visiteurs)
+            {
+                info += v.ToString();
+            }
+            return info;
         }
     }
 }

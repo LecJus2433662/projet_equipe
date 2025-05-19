@@ -7,6 +7,7 @@ namespace TournoiPickleball
         static void Main(string[] args)
         {
 
+            Tournoi tournoi = new Tournoi();
         }
     }
 }

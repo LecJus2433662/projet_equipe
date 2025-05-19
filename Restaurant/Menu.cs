@@ -8,10 +8,8 @@ namespace Restaurant
 {
     public class Menu
     {
-        List<Plat> plats;
-        string Nom { get; set; }
-
-
+        public List<Plat> plats { get; private set; }
+        private string Nom { get; set; }
 
         public Menu(string nom)
         {
@@ -33,6 +31,7 @@ namespace Restaurant
             }
             return afficher;
         }
+
         public override string ToString()
         {
             return $"Votre menu s'appelle - [{Nom}]\n\n" + GetInfoPlat();

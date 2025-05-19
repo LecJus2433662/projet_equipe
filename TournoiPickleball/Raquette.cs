@@ -6,29 +6,48 @@ using System.Threading.Tasks;
 
 namespace TournoiPickleball
 {
-    public class Raquette
+
+
+    public abstract class Raquette
     {
-        public int Durabilite { get; set; }
-        public int Poid { get; set; }
-        public Random Random { get; set; }
+        public string Marque { get; protected set; }
+        public int Durabilite { get; protected set; }
+        public int DurabiliteMax { get; protected set; }
 
-        protected Raquette(int durabilite, int poid)
+        public Raquette(string marque, int durabiliteMax)
         {
-                Durabilite = durabilite;
-                Poid = poid;
-                Random = new Random();
-            }
+            Marque = marque;
+            DurabiliteMax = durabiliteMax;
+            Durabilite = durabiliteMax;
+        }
 
-            protected Raquette()
+        public virtual void AfficherEtat()
+        {
+            Console.WriteLine($"Raquette {Marque} - Durabilité : {Durabilite}/{DurabiliteMax}");
+
+            double ratio = Durabilite / DurabiliteMax;
+
+            if (ratio >= 0.61)
             {
-                Random = new Random();
-                Durabilite = Random.Next(1, 13); 
-                Poid = Random.Next(1, 13);
+                Console.WriteLine("Raquette prête à l’utilisation !");
             }
+            else if (ratio >= 0.31)
+            {
+                Console.WriteLine("Votre raquette commence à s’user. Pensez à la faire vérifier bientôt.");
+            }
+            else
+            {
+                Console.WriteLine("Raquette en mauvais état. Réparation urgente recommandée !");
+            }
+        }
 
-        public override string ToString()
+        public void UserRaquette(int quantite)
         {
-            return $"Durabilité: {Durabilite}\tPoid: {Poid}";
+            Durabilite -= quantite;
+            if (Durabilite < 0)
+            {
+                Durabilite = 0;
+            }
         }
     }
 }
