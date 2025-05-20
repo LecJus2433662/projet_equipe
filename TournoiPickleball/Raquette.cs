@@ -11,8 +11,8 @@ namespace TournoiPickleball
     public abstract class Raquette
     {
         public string Marque { get; protected set; }
-        public int Durabilite { get; protected set; }
-        public int DurabiliteMax { get; protected set; }
+        public double Durabilite { get; protected set; }
+        public double DurabiliteMax { get; protected set; }
 
         public Raquette(string marque, int durabiliteMax)
         {
@@ -20,8 +20,6 @@ namespace TournoiPickleball
             DurabiliteMax = durabiliteMax;
             Durabilite = durabiliteMax;
         }
-
-        
 
         public void UserRaquette(int quantite)
         {
@@ -31,6 +29,7 @@ namespace TournoiPickleball
                 Durabilite = 0;
             }
         }
+
         public override string ToString()
         {
             string etat = "";
@@ -42,7 +41,7 @@ namespace TournoiPickleball
             {
                 etat += "Raquette prête à l’utilisation !";
             }
-            else if (ratio >= 0.31)
+            else if (ratio >= 0.31 && ratio <= 0.60)
             {
                 etat += "Votre raquette commence à s’user. Pensez à la faire vérifier bientôt.";
             }

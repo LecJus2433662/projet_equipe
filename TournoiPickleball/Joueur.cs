@@ -15,9 +15,6 @@ namespace TournoiPickleball
 
     public class Joueur
     {
-
-
-
         public string Nom { get; private set; }
         public TypeJoueur Type { get; private set; }
         public int Experience { get; private set; }
@@ -53,9 +50,9 @@ namespace TournoiPickleball
         {
             string info = "";
             info = $"\n{Nom} ({Type})\n";
-            info += $"→ Niveau : {Niveau}\n";
-            info += $"→ Expérience : {Experience}\n";
-            info += $"→ Aura : {Aura} \n";
+            info += $"Niveau : {Niveau}\n";
+            info += $"Expérience : {Experience}\n";
+            info += $"Aura : {Aura} \n";
             info +=  Raquette + "\n";
             return info;
         }
