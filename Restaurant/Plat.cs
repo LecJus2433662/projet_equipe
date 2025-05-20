@@ -12,8 +12,8 @@ namespace Restaurant
         public List<Ingredient> ingrediantDispo;
         public List<Ingredient> ingredientsPlat;
         public string Nom { get; private set; }
-        private double PrixIngredient { get; set; }
-        public double PrixAchat { get; private set; }
+        private float PrixIngredient { get; set; }
+        public float PrixAchat { get; set; }
 
         public Plat(string nom)
         {
@@ -23,22 +23,22 @@ namespace Restaurant
             PrixAchat = CalculerVente();
         }
 
-        public double CalculerCout()
+        public float CalculerCout()
         {
-            double result = 0;
-            foreach (Ingredient ingredient in ingrediantDispo)
+            float result = 0;
+            foreach (Ingredient ingredient in ingredientsPlat)
             {
                 result += ingredient.PrixAchat;
             }
             return result;
         }
 
-        public double CalculerVente()
+        public float CalculerVente()
         {
-            double prixFinal = 0;
-            double taxeUni = 1.5;
+            float prixFinal = 0;
+            float taxeUni = 1;
 
-            foreach (Ingredient ingredient in ingrediantDispo)
+            foreach (Ingredient ingredient in ingredientsPlat)
             {
                 if (ingredient.QualiteIng == Qualite.Excellente) taxeUni += 3;
                 else if (ingredient.QualiteIng == Qualite.Moyenne) taxeUni += 2;

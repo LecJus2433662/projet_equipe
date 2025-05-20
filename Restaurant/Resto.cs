@@ -10,7 +10,7 @@ namespace Restaurant
 {
     public class Resto
     {
-        double Total { get; set; }
+        float Total { get; set; }
         bool end;
         Plat IngredientsPourPlat;
         Menu menu;
@@ -35,9 +35,25 @@ namespace Restaurant
 
         void AfficherMenu()
         {
+            omelette.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[2]);
+            omelette.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[2]);
+            omelette.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[12]);
             menu.AjouterPlat(omelette);
+            omelette.PrixAchat = omelette.CalculerVente();
+
+            spaghetti.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[15]);
+            spaghetti.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[10]);
+            spaghetti.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[13]);
             menu.AjouterPlat(spaghetti);
+            spaghetti.PrixAchat = spaghetti.CalculerVente();
+
+            clubSandwich.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[17]);
+            clubSandwich.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[12]);
+            clubSandwich.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[10]);
+            clubSandwich.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[13]);
             menu.AjouterPlat(clubSandwich);
+            clubSandwich.PrixAchat = clubSandwich.CalculerVente();
+
             Total = 1000;
             end = true;
 
@@ -89,7 +105,15 @@ namespace Restaurant
                                 int.TryParse(Console.ReadLine(), out int nbIngrediant);
                                 for (int i = 0; i < nbIngrediant; i++)
                                 {
+                                    if (Total > IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat)
+                                    {
+                                        Total -= IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat;
                                     nouveauPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Trop pauvre pour acheter plus d'ingrédients pour le plat.");
+                                    }
                                 }
                             }
                             else
@@ -98,6 +122,7 @@ namespace Restaurant
                             }
                         }
                         menu.AjouterPlat(nouveauPlat);
+                        nouveauPlat.PrixAchat = nouveauPlat.CalculerVente();
                         break;
 
                     case "4":
@@ -115,7 +140,9 @@ namespace Restaurant
                                 int.TryParse(Console.ReadLine(), out int achat);
                                 for (int i = 0; i < achat; i++)
                                 {
-                                    double prixAvecReduction = IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat - reductionEmploye;
+                                    float prixAvecReduction = IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat - reductionEmploye;
+
+
                                     if (prixAvecReduction < 0) prixAvecReduction = 0;
 
                                     if (Total >= prixAvecReduction)
@@ -151,7 +178,7 @@ namespace Restaurant
                     case "6":
                         Console.WriteLine("=== Service des clients ===\n");
                         Random rnd = new Random();
-                        double totalArgentGagne = 0;
+                        float totalArgentGagne = 0;
                         int nbPlatsServis = 0;
                         foreach (Client client in clients)
                         {
