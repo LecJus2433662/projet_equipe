@@ -11,8 +11,8 @@ namespace TournoiPickleball
     public abstract class Raquette
     {
         public string Marque { get; protected set; }
-        public int Durabilite { get; protected set; }
-        public int DurabiliteMax { get; protected set; }
+        public double Durabilite { get; protected set; }
+        public double DurabiliteMax { get; protected set; }
 
         public Raquette(string marque, int durabiliteMax)
         {
