@@ -19,7 +19,12 @@ namespace Restaurant
         string prenom;
         Temperament temperament;
 
-        public Visiteur() { }
+        public Visiteur(string nom, string prenom, Temperament temperament)
+        {
+            this.nom = nom;
+            this.prenom = prenom;
+            this.temperament = temperament;
+        }
 
         public void CreerNom()
         {
@@ -39,22 +44,31 @@ namespace Restaurant
         {
             Random random = new Random();
             int rnd = random.Next(1, 4);
-            Temperament temperament = rnd switch
+            Temperament temperament;
+            switch (rnd)
             {
-                1 => Temperament.GoodBoy,
-                2 => Temperament.BadBoy,
-                _ => Temperament.MediumBoy,
-            };
+                case 1:
+                    temperament = Temperament.MediumBoy;
+                    break;
+                case 2:
+                    temperament = Temperament.GoodBoy;
+                    break;
+                case 3:
+                    temperament = Temperament.BadBoy;
+                    break;
+                default:
+                    temperament = Temperament.MediumBoy; 
+                    break;
+            }
 
-            Visiteur visiteur = new Visiteur();
-            visiteur.temperament = temperament;
-            visiteur.CreerNom();
+            Visiteur visiteur = new Visiteur("", "", temperament); 
+            visiteur.CreerNom(); 
             return visiteur;
         }
 
         public override string ToString()
         {
-            return $"	{prenom,-10} {nom,-10} - {temperament}\n";
+            return $"    {prenom,-10} {nom,-10} - {temperament}\n";
         }
     }
 }

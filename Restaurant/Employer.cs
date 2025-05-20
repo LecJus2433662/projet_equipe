@@ -14,12 +14,12 @@ namespace Restaurant
         TresRare,
         Legendaire
     }
-    public class EngagerEmployer
+    public class Employer
     {
         string Nom { get; set; }
         RareteEmployer RareteEmployer { get; set; }
 
-        public EngagerEmployer(string nomEmployer)
+        public Employer(string nomEmployer)
         {
             Nom = nomEmployer;
         }

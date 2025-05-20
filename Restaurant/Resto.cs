@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading;
@@ -33,7 +34,7 @@ namespace Restaurant
             AfficherMenu();
         }
 
-        void AfficherMenu()
+        public void AfficherMenu()
         {
             omelette.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[2]);
             omelette.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[2]);
@@ -55,13 +56,13 @@ namespace Restaurant
             clubSandwich.PrixAchat = clubSandwich.CalculerVente();
 
             Total = 1000;
-            end = true;
+            end = false;
 
             Console.WriteLine("Appuyer sur ENTER pour afficher votre menu");
             Console.ReadLine();
             Console.Clear();
 
-            while (end)
+            while (!end)
             {
                 Console.Clear();
                 Console.WriteLine("1: afficher menu basique");
@@ -79,138 +80,157 @@ namespace Restaurant
                 {
                     case "1":
                         Console.WriteLine(menu);
-                        Thread.Sleep(5000);
+                        Console.ReadKey();
                         break;
 
                     case "2":
                         Console.WriteLine(menu);
                         Console.WriteLine($"Vous avez un total de : {Total}$");
-                        Thread.Sleep(5000);
+                        Console.ReadKey();
                         break;
 
                     case "3":
-                        Thread.Sleep(5000);
-                        Console.WriteLine("Quel est le nom du plat que vous voulez acheter?");
-                        string plat = Console.ReadLine();
-                        Plat nouveauPlat = new Plat(plat);
-                        while (true)
-                        {
-                            Console.WriteLine("Quel ingrédient voulez-vous dans le plat ? Appuyez sur 0 pour finir le plat");
-                            Console.WriteLine(IngredientsPourPlat.InfoIngrediantDispo());
-                            int.TryParse(Console.ReadLine(), out int choice);
-                            if (choice == 0) break;
-                            if (choice >= 1 && choice <= 20)
-                            {
-                                Console.WriteLine($"Combien de {IngredientsPourPlat.ingrediantDispo[choice - 1]} voulez-vous ?");
-                                int.TryParse(Console.ReadLine(), out int nbIngrediant);
-                                for (int i = 0; i < nbIngrediant; i++)
-                                {
-                                    if (Total > IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat)
-                                    {
-                                        Total -= IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat;
-                                    nouveauPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Trop pauvre pour acheter plus d'ingrédients pour le plat.");
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Ce n'est pas un ingrédient valide.");
-                            }
-                        }
-                        menu.AjouterPlat(nouveauPlat);
-                        nouveauPlat.PrixAchat = nouveauPlat.CalculerVente();
+                        CreerPlat();
                         break;
 
                     case "4":
-                        bool AssezArgent = true;
-                        while (AssezArgent)
-                        {
-                            Console.WriteLine($"Total argent : {Total:F2}$");
-                            Console.WriteLine(IngredientsPourPlat.InfoIngrediantDispo());
-                            Console.WriteLine("Quel ingrédient voulez-vous acheter ? Appuyez sur 0 pour quitter.");
-                            int.TryParse(Console.ReadLine(), out int choice);
-                            if (choice == 0) break;
-                            if (choice >= 1 && choice <= 20)
-                            {
-                                Console.WriteLine($"Combien de {IngredientsPourPlat.ingrediantDispo[choice - 1]} voulez-vous acheter ?");
-                                int.TryParse(Console.ReadLine(), out int achat);
-                                for (int i = 0; i < achat; i++)
-                                {
-                                    float prixAvecReduction = IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat - reductionEmploye;
-
-
-                                    if (prixAvecReduction < 0) prixAvecReduction = 0;
-
-                                    if (Total >= prixAvecReduction)
-                                    {
-                                        Total -= prixAvecReduction;
-                                        IngredientsPourPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Trop pauvre pour acheter plus d'ingrédients.");
-                                        break;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Ce n'est pas un ingrédient valide.");
-                            }
-                        }
+                        AcheterIngredients();
                         break;
 
                     case "5":
-                        Console.WriteLine("=== Informations des clients ===\n");
-                        foreach (Client client in clients)
-                        {
-                            Console.WriteLine($"Nombre de client : {client.AfficherNombreDeClient()}\n");
-                            Console.WriteLine(client);
-                        }
-                        Console.WriteLine("Appuyez sur une touche pour continuer...");
-                        Console.ReadKey();
+                        InfoClient();
                         break;
 
                     case "6":
-                        Console.WriteLine("=== Service des clients ===\n");
-                        Random rnd = new Random();
-                        float totalArgentGagne = 0;
-                        int nbPlatsServis = 0;
-                        foreach (Client client in clients)
-                        {
-                            if (menu.Plats.Count == 0)
-                            {
-                                Console.WriteLine("Aucun plat disponible.");
-                                break;
-                            }
-
-                            int indexPlat = rnd.Next(menu.Plats.Count);
-                            Plat platServi = menu.Plats[indexPlat];
-                            Console.WriteLine($"Le client {client} reçoit le plat : {platServi.Nom}");
-                            totalArgentGagne += platServi.PrixAchat;
-                            nbPlatsServis++;
-                        }
-                        Total += totalArgentGagne;
-                        Console.WriteLine($"\n{nbPlatsServis} plats servis, vous avez gagné {totalArgentGagne:F2}$");
-                        Console.WriteLine("Appuyez sur une touche pour continuer...");
-                        Console.ReadKey();
+                        ServirClient();
                         break;
 
                     case "7":
                         Console.WriteLine("Fin de la journée");
-                        end = false;
+                        end = true;
                         break;
-
                     case "0":
                         EmployerMystere();
-                        Thread.Sleep(5000);
+                        Console.ReadKey();
                         break;
                 }
             }
+        }
+        void CreerPlat()
+        {
+            Console.WriteLine("Quel est le nom du plat que vous voulez acheter?");
+            string plat = Console.ReadLine();
+            Plat nouveauPlat = new Plat(plat);
+            bool finAchat = false;
+            while (!finAchat)
+            {
+                Console.WriteLine("Quel ingrédient voulez-vous dans le plat ? Appuyez sur 0 pour finir le plat");
+                Console.WriteLine(IngredientsPourPlat.InfoIngrediantDispo());
+                int.TryParse(Console.ReadLine(), out int choice);
+                if (choice == 0) finAchat = true;
+                if (choice >= 1 && choice <= 20)
+                {
+                    Console.WriteLine($"Combien de {IngredientsPourPlat.ingrediantDispo[choice - 1]} voulez-vous ?");
+                    int.TryParse(Console.ReadLine(), out int nbIngrediant);
+                    for (int i = 0; i < nbIngrediant; i++)
+                    {
+                        if (Total > IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat)
+                        {
+                            Total -= IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat;
+                            nouveauPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Trop pauvre pour acheter plus d'ingrédients pour le plat.");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ce n'est pas un ingrédient valide.");
+                }
+            }
+            menu.AjouterPlat(nouveauPlat);
+            nouveauPlat.PrixAchat = nouveauPlat.CalculerVente();
+        }
+
+        void AcheterIngredients()
+        {
+            bool AssezArgent = true;
+            while (AssezArgent)
+            {
+                Console.WriteLine($"Total argent : {Total:F2}$");
+                Console.WriteLine(IngredientsPourPlat.InfoIngrediantDispo());
+                Console.WriteLine("Quel ingrédient voulez-vous acheter ? Appuyez sur 0 pour quitter.");
+                int.TryParse(Console.ReadLine(), out int choice);
+                if (choice == 0) break;
+                if (choice >= 1 && choice <= 20)
+                {
+                    Console.WriteLine($"Combien de {IngredientsPourPlat.ingrediantDispo[choice - 1]} voulez-vous acheter ?");
+                    int.TryParse(Console.ReadLine(), out int achat);
+                    for (int i = 0; i < achat; i++)
+                    {
+                        float prixAvecReduction = IngredientsPourPlat.ingrediantDispo[choice - 1].PrixAchat - reductionEmploye;
+
+
+                        if (prixAvecReduction < 0) prixAvecReduction = 0;
+
+                        if (Total >= prixAvecReduction)
+                        {
+                            Total -= prixAvecReduction;
+                            IngredientsPourPlat.ingredientsPlat.Add(IngredientsPourPlat.ingrediantDispo[choice - 1]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Trop pauvre pour acheter plus d'ingrédients.");
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ce n'est pas un ingrédient valide.");
+                }
+            }
+        }
+
+        void ServirClient()
+        {
+            Console.WriteLine("=== Service des clients ===\n");
+            Random rnd = new Random();
+            float totalArgentGagne = 0;
+            int nbPlatsServis = 0;
+            foreach (Client client in clients)
+            {
+                if (menu.Plats.Count == 0)
+                {
+                    Console.WriteLine("Aucun plat disponible.");
+                    break;
+                }
+
+                int indexPlat = rnd.Next(menu.Plats.Count);
+                Plat platServi = menu.Plats[indexPlat];
+                Console.WriteLine($"Le client {client} reçoit le plat : {platServi.Nom}");
+                totalArgentGagne += platServi.PrixAchat;
+                nbPlatsServis++;
+            }
+            Total += totalArgentGagne;
+            Console.WriteLine($"\n{nbPlatsServis} plats servis, vous avez gagné {totalArgentGagne:F2}$");
+            Console.WriteLine("Appuyez sur une touche pour continuer...");
+            Console.ReadKey();
+        }
+
+        void InfoClient()
+        {
+            int nbClients = 5;
+            Console.WriteLine("=== Informations des clients ===\n");
+            Console.WriteLine($"Nombre de client : {nbClients}\n");
+            foreach (Client client in clients)
+            {
+                Console.WriteLine(client);
+            }
+            Console.WriteLine("Appuyez sur une touche pour continuer...");
+            Console.ReadKey();
         }
 
         void EmployerMystere()
@@ -218,20 +238,21 @@ namespace Restaurant
             Console.WriteLine("************************************  Employé Mystère  ****************************************************\n");
             Console.WriteLine("Appuyez sur ENTER pour faire apparaître votre employé");
             Console.ReadLine();
-            EngagerEmployer employer = new EngagerEmployer("M.Bernard");
+            Employer employer = new Employer("M.Bernard");
             Console.WriteLine(employer);
         }
 
         void CreerClients()
         {
-            for (int i = 0; i < 5; i++)
+            int nbClient = 5;
+            for (int i = 0; i < nbClient; i++)
             {
-                string nomClient = FabriqueNom.GetRandomNom();
+                string nomClient = FabriqueNom.GetRandomPrenom() + " " + FabriqueNom.GetRandomNom();
                 Client client = new Client(nomClient);
                 int nbVisiteurs = new Random().Next(1, 4);
                 for (int j = 0; j < nbVisiteurs; j++)
                 {
-                    client.AjouterVisiteur(Visiteur.CreerVisiteurAleatoire());
+
                 }
                 clients.Add(client);
             }

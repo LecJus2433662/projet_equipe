@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,7 @@ namespace TournoiPickleball
             equipe2.ReinitialiserScore();
 
             Random rand = new Random();
-
+            bool continuer = true;
             while (equipe1.Score < 15 && equipe2.Score < 15)
             {
                 int point = rand.Next(0, 2);
@@ -60,6 +61,10 @@ namespace TournoiPickleball
                 {
                     equipe2.AjouterPoint();
                 }
+            }
+            if(equipe1.Joueur1.Raquette.Durabilite == 0)
+            {
+                continuer = false;
             }
 
             Console.WriteLine($"{equipe1.NomEquipe} : {equipe1.Score} points");

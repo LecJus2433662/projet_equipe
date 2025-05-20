@@ -45,7 +45,7 @@ namespace Restaurant
             }
         }
 
-        static public string GetRandomNom()
+        public static string GetRandomNom()
         {
             if (ListNom.Count == 0)
                 throw new InvalidOperationException("La liste des noms est vide.");
