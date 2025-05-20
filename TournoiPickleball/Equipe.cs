@@ -31,12 +31,7 @@ namespace TournoiPickleball
             Score++;
         }
 
-        public void AfficherStats()
-        {
-            Console.WriteLine($"--- {NomEquipe} ---");
-            Console.WriteLine(Joueur1);
-            Console.WriteLine(Joueur2);
-        }
+        
 
         public void RecompenseGagnants()
         {

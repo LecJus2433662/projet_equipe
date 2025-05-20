@@ -8,24 +8,24 @@ namespace Restaurant
 {
     public class Menu
     {
-        public List<Plat> plats { get; private set; }
+        public List<Plat> Plats { get; private set; }
         private string Nom { get; set; }
 
         public Menu(string nom)
         {
-            plats = new List<Plat>();
+            Plats = new List<Plat>();
             Nom = nom;
         }
 
         public void AjouterPlat(Plat plat)
         {
-            plats.Add(plat);
+            Plats.Add(plat);
         }
 
         public string GetInfoPlat()
         {
             string afficher = "";
-            foreach (Plat plat in plats)
+            foreach (Plat plat in Plats)
             {
                 afficher += plat + "\n";
             }

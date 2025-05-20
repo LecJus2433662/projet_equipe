@@ -12,7 +12,6 @@ namespace Restaurant
         public List<Ingredient> ingrediantDispo;
         public List<Ingredient> ingredientsPlat;
         public string Nom { get; private set; }
-        private float PrixIngredient { get; set; }
         public float PrixAchat { get; set; }
 
         public Plat(string nom)

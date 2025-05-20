@@ -34,7 +34,7 @@ namespace Restaurant
 
         public override string ToString()
         {
-            string info = $"Nom du client : {Nom}\n";
+            string info = "";
             foreach (var v in visiteurs)
             {
                 info += v.ToString();

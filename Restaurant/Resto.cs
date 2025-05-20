@@ -168,8 +168,8 @@ namespace Restaurant
                         Console.WriteLine("=== Informations des clients ===\n");
                         foreach (Client client in clients)
                         {
+                            Console.WriteLine($"Nombre de client : {client.AfficherNombreDeClient()}\n");
                             Console.WriteLine(client);
-                            Console.WriteLine($"Nombre de visiteurs : {client.AfficherNombreDeClient()}\n");
                         }
                         Console.WriteLine("Appuyez sur une touche pour continuer...");
                         Console.ReadKey();
@@ -182,14 +182,14 @@ namespace Restaurant
                         int nbPlatsServis = 0;
                         foreach (Client client in clients)
                         {
-                            if (menu.plats.Count == 0)
+                            if (menu.Plats.Count == 0)
                             {
                                 Console.WriteLine("Aucun plat disponible.");
                                 break;
                             }
 
-                            int indexPlat = rnd.Next(menu.plats.Count);
-                            Plat platServi = menu.plats[indexPlat];
+                            int indexPlat = rnd.Next(menu.Plats.Count);
+                            Plat platServi = menu.Plats[indexPlat];
                             Console.WriteLine($"Le client {client} reçoit le plat : {platServi.Nom}");
                             totalArgentGagne += platServi.PrixAchat;
                             nbPlatsServis++;

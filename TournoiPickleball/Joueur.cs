@@ -40,12 +40,11 @@ namespace TournoiPickleball
             Aura += points;
         }
 
-
-
         public int Niveau
         {
             get { return Experience / 50; }
         }
+
         public override string ToString()
         {
             string info = "";

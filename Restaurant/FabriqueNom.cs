@@ -9,9 +9,9 @@ namespace Restaurant
 {
     static class FabriqueNom
     {
-        static List<string> listNom = new List<string>();
-        static List<string> listPrenom = new List<string>();
-        static Random rand = new Random();
+        static List<string> ListNom = new List<string>();
+        static List<string> ListPrenom = new List<string>();
+        static Random Rand = new Random();
 
         static public void RemplirListe()
         {
@@ -28,7 +28,7 @@ namespace Restaurant
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    listNom.Add(line);
+                    ListNom.Add(line);
                 }
             }
         }
@@ -40,23 +40,23 @@ namespace Restaurant
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    listPrenom.Add(line);
+                    ListPrenom.Add(line);
                 }
             }
         }
 
         static public string GetRandomNom()
         {
-            if (listNom.Count == 0)
+            if (ListNom.Count == 0)
                 throw new InvalidOperationException("La liste des noms est vide.");
-            return listNom[rand.Next(listNom.Count)];
+            return ListNom[Rand.Next(ListNom.Count)];
         }
 
         static public string GetRandomPrenom()
         {
-            if (listPrenom.Count == 0)
+            if (ListPrenom.Count == 0)
                 throw new InvalidOperationException("La liste des prénoms est vide.");
-            return listPrenom[rand.Next(listPrenom.Count)];
+            return ListPrenom[Rand.Next(ListPrenom.Count)];
         }
     }
 }
