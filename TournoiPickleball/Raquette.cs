@@ -21,8 +21,6 @@ namespace TournoiPickleball
             Durabilite = durabiliteMax;
         }
 
-        
-
         public void UserRaquette(int quantite)
         {
             Durabilite -= quantite;
@@ -31,6 +29,7 @@ namespace TournoiPickleball
                 Durabilite = 0;
             }
         }
+
         public override string ToString()
         {
             string etat = "";
@@ -42,7 +41,7 @@ namespace TournoiPickleball
             {
                 etat += "Raquette prête à l’utilisation !";
             }
-            else if (ratio >= 0.31)
+            else if (ratio >= 0.31 && ratio <= 0.60)
             {
                 etat += "Votre raquette commence à s’user. Pensez à la faire vérifier bientôt.";
             }
